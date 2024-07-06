@@ -1,1 +1,4 @@
-# Pod-Shop-App-Configs
+# Pod-Shop
+ ***App-Configuration***
+
+ ---
