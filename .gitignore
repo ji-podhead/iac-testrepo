@@ -1,0 +1,24 @@
+# Terraform Variable Definitions
+*.tfvars
+*.auto.tfvars
+
+# Terraform State Files
+*.tfstate
+*.tfstate.backup
+
+# Logs
+*.log
+
+# Local Configuration Files
+.envrc
+.nvmrc
+.pipreqs.txt
+.Python
+.pytest_cache/
+__pycache__/
+
+# OS generated files
+.DS_Store*
+Thumbs.db
+# old
+old
