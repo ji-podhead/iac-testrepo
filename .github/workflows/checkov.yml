@@ -29,7 +29,7 @@ jobs:
 
       - name: Run Checkov scan
         run: |
-          checkov --directory . --format json > checkov_results.json
+          checkov --directory .  -o json 
       - name: Display Directory Contents and File Content
         run: |
           echo "Listing directory contents:"
