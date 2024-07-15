@@ -36,8 +36,7 @@ pipeline {
             }
         }
         stage('Analyze Terraform Plan with Checkov') {
-            when {changeset(pattern: '**/*', directory: './terraform')}
-            steps {
+            when { changeset pattern: '**/terraform/*' } // Entfernung des ungültigen 'directory'-Parameters            steps {
                 sh '''
                     cd ./terraform
                     terraform init
@@ -48,13 +47,13 @@ pipeline {
             }
         }
         
-        stage('Kubernetes') {
-            when {changeset(pattern: '**/*', directory: './k8s')}
-            steps {
-                // Kubernetes-Buildschritte
-            }
-        }
-    }
+      //  stage('Kubernetes') {
+       //     when {changeset(pattern: '**/*', directory: './k8s')}
+      //      steps {
+     //           // Kubernetes-Buildschritte
+    //        }
+   //     }
+ 
     
     options {
         preserveStashes()
