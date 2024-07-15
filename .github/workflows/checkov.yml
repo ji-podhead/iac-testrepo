@@ -30,7 +30,13 @@ jobs:
       - name: Run Checkov scan
         run: |
           checkov --directory . --format json > checkov_results.json
-
+      - name: Display Directory Contents and File Content
+        run: |
+          echo "Listing directory contents:"
+          ls -la
+          
+          echo "Displaying content of a specific file:"
+          cat path/to/your/file.txt
 
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
