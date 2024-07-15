@@ -27,7 +27,7 @@ jobs:
       
       # Publish Test Results
       - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
+        uses: example-publish-test-results-action@v1
         if: always()
         with:
           files: |
