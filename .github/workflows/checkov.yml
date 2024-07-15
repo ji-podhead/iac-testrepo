@@ -52,7 +52,7 @@ jobs:
         run: |
             # Berechnen Sie die Laufzeit
             EXECUTION_TIME=$(date +%s)-$TEMPORARY_END_TIME # Dies sollte durch die tatsächliche Berechnung ersetzt werden
-            
+            echo "laufzeit ist"
             echo $TEMPORARY_END_TIME
 
             # Lesen Sie die JUnit-XML-Datei
