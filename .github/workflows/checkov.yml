@@ -16,6 +16,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        
+        
+      - name: Get Start time
+        if: always()
+        id: starttime
+        run: echo "::set-output name=start::$(date +%s)"
+
+
       
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -43,7 +51,10 @@ jobs:
         if: always()
         run: |
             # Berechnen Sie die Laufzeit
-            EXECUTION_TIME=123 # Dies sollte durch die tatsächliche Berechnung ersetzt werden
+            END_TIME=$(date +%s)
+            EXECUTION_TIME=$((END_TIME - $(echo "${{ steps.starttime.outputs.start }}" | base64 --decode)))
+
+            # EXECUTION_TIME=$(date +%s)-$start # Dies sollte durch die tatsächliche Berechnung ersetzt werden
             
             # Lesen Sie die JUnit-XML-Datei
             JUNIT_XML=$(cat checkov_results.xml)
