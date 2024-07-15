@@ -33,6 +33,7 @@ jobs:
 
           # Schritt: Convert Checkov output to JSON
       - name: Convert Checkov output to JSON
+        if: always()
         run: |
           python -c "
           import xml.etree.ElementTree as ET
