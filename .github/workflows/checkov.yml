@@ -17,9 +17,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         
-        - name: Get Start time
+      - name: Get Start time
         id: starttime
-        run: echo "::set-output name=start::$(date +%s)"
         if: always()
         run: |
             start=$(date +%s)
