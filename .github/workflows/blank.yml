@@ -26,6 +26,7 @@ jobs:
       - uses: actions/checkout@v2
       
       # Publish Test Results
+
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
@@ -34,4 +35,11 @@ jobs:
             test-results/**/*.xml
             test-results/**/*.trx
             test-results/**/*.json
-
+      - name: Publish Test Results1
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            test-results/**/*.xml
+            test-results/**/*.trx
+            test-results/**/*.json
