@@ -6,7 +6,10 @@ on:
   pull_request:
     branches: [ "main", "development" ]
   workflow_dispatch:
-
+permissions:
+  contents: read
+  actions: read
+  checks: write
 jobs:
   checkov_scan_and_upload_results:
     runs-on: ubuntu-latest
