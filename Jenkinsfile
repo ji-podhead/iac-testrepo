@@ -1,6 +1,6 @@
 pipeline {
     agent any
-        stages {
+    stages {
         stage('Checkout') {
             steps {
                 checkout scmGit(branches: [[name: 'development']],
@@ -35,18 +35,31 @@ pipeline {
                 }
             }
         }
+
         stage('Analyze Terraform Plan with Checkov') {
-            when { changeset pattern: '**/terraform/*' } // Entfernung des ungültigen 'directory'-Parameters            steps {
-                sh '''
-                    cd ./terraform
-                    terraform init
-                    terraform plan -out=tf.plan
-                    terraform show -json tf.plan > tf.json
-                    checkov -f tf.json
-                '''
+            when { changeset pattern: '**/terraform/*' }
+            steps {
+                script {
+                    sh '''
+                        cd ./terraform
+                        terraform init
+                        terraform plan -out=tf.plan
+                        terraform show -json tf.plan > tf.json
+                        checkov -f tf.json
+                    '''
+                }
             }
         }
-        
+    
+
+
+    }
+    options {
+        preserveStashes()
+        timestamps()
+    }
+}
+
       //  stage('Kubernetes') {
        //     when {changeset(pattern: '**/*', directory: './k8s')}
       //      steps {
@@ -55,8 +68,4 @@ pipeline {
    //     }
  
     
-    options {
-        preserveStashes()
-        timestamps()
-    }
-}
+
