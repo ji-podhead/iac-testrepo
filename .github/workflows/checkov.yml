@@ -30,14 +30,31 @@ jobs:
       - name: Run Checkov scan
         run: |
           checkov --directory . 
-          
 
-            
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          files: |
-            test-results/**/*.xml
-            test-results/**/*.trx
-            test-results/**/*.json
+          # Schritt: Convert Checkov output to JSON
+      - name: Convert Checkov output to JSON
+        run: |
+          python -c "
+          import xml.etree.ElementTree as ET
+          import json
+      
+          tree = ET.parse('checkov.out.xml')
+          root = tree.getroot()
+      
+          findings = []
+          for finding in root.findall('.//finding'):
+              item = {}
+              for child in finding:
+                  item[child.tag] = child.text
+              findings.append(item)
+      
+          with open('checkov_output.json', 'w') as f:
+              json.dump(findings, f)
+          "
+
+          - name: Publish Test Results
+            uses: EnricoMi/publish-unit-test-result-action@v2
+            if: always()
+            with:
+              files: checkov_output.json
+
