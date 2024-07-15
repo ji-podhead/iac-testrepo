@@ -45,7 +45,7 @@ jobs:
         run: |
             END_TIME=$(date +%s%N) # Jetzt auch Mikrosekunden berücksichtigen
             START_TIME=$(cat start_time.txt)
-            EXECUTION_TIME=$( END_TIME - START_TIME  ) # Konvertieren Sie in Millisekunden
+            EXECUTION_TIME=$( END_TIME - START_TIME   ) # Konvertieren Sie in Millisekunden
             sed -i "s/time=\"0.0\"/time=\"${EXECUTION_TIME}\"/" checkov_results.xml
             sed -i "s/time=\"0\"/time=\"${EXECUTION_TIME}\"/" checkov_results.xml
             echo "runtime is: " $EXECUTION_TIME
