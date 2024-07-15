@@ -31,12 +31,12 @@ jobs:
         run: |
           checkov --directory .  -o json > checkov_results.json
       - name: Display Directory Contents and File Content
+        if: always()
         run: |
           echo "Listing directory contents:"
-          ls -la
-          
+          ls -la          
           echo "Displaying content of a specific file:"
-          cat path/to/your/file.txt
+          cat ./checkov_results.json
 
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
