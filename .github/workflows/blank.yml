@@ -10,28 +10,39 @@ on:
   pull_request:
     branches: [ "development" ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+  # All
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  build-and-publish:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-      
-      # Publish Test Results
-      - name: Publish Test Results
-        uses: example-publish-test-results-action@v1
-        if: always()
-        with:
-          files: |
-            test-results/**/*.xml
-            test-results/**/*.trx
-            test-results/**/*.json
+    - uses: actions/checkout@v2
+      name: Checkout Code
 
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x' # Stellen Sie sicher, dass Sie die richtige Python-Version verwenden
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest # Fügen Sie hier weitere Abhängigkeiten hinzu, falls erforderlich
+
+    - name: Run Tests
+      run: |
+        pytest # Führen Sie Ihre Tests aus. Passen Sie diesen Befehl an Ihre Anforderungen an.
+
+    - name: Publish Test Results
+      id: publish_test_results
+      uses: marketplacer/publish-test-results@v1
+      with:
+        test-result-file: '**/test-results.xml' # Pfad zu Ihrer Testergebnisdatei
+        report-level: summary # Optional: Setzen Sie auf 'summary', 'detail', oder lassen Sie es leer für Standard
+        fail-if: true # Optional: Setzt den Exit-Code auf 1, wenn keine Testergebnisse gefunden werden
+
+    - name: Upload Coverage Report
+      if: ${{ failure() || always() }}
+      uses: codecov-action@v2
+      with:
+        file: ./coverage.xml # Pfad zu Ihrer Coverage-Datei
