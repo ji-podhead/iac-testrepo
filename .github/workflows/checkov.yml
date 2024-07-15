@@ -26,9 +26,10 @@ jobs:
 
       - name: Run Checkov scan
         run: |
-          checkov --directory . --fail-on HIGH,CRITICAL
+          checkov --directory . 
           
-      - name: Create and upload test results branch
+      - name: Create and upload test results branch  
+        if: always()
         run: |
           import os
           from git import Repo
