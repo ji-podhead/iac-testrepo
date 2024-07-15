@@ -67,7 +67,7 @@ token = var.vault_token
     token = data.vault_kv_secret_v2.github.data["github_token"]
     
   }
-    
+     /*
   provider "proxmox" {
     pm_api_url    = local.conf.proxmox_api_url
     pm_api_token_id = local.conf.proxmox_api_token_id
@@ -124,7 +124,7 @@ token = var.vault_token
     } # end lifecycle
 
   }
- /*
+
   data "github_actions_public_key" "example_public_key" {
     repository = "Pod-Shop-App-Configs"
   }
