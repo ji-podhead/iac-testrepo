@@ -48,8 +48,7 @@ jobs:
         run: |
             # Berechnen Sie die Laufzeit
             END_TIME=$(date +%s)
-            EXECUTION_TIME=$((END_TIME - ${ { steps.starttime.outputs.start } }))
-            echo "Laufzeit ist $EXECUTION_TIME Sekunden"
+            EXECUTION_TIME=$((END_TIME - ${ { steps.starttime.outputs.start } })) # Korrigierte Syntax            echo "Laufzeit ist $EXECUTION_TIME Sekunden"
 
             # Lesen Sie die JUnit-XML-Datei
             JUNIT_XML=$(cat checkov_results.xml)
