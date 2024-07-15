@@ -29,7 +29,7 @@ jobs:
 
       - name: Run Checkov scan
         run: |
-          checkov --directory .  -o json > checkov_results.json
+          checkov --directory .  -o junitxml > checkov_results.xml
       - name: Display Directory Contents and File Content
         if: always()
         run: |
@@ -42,5 +42,5 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          files: checkov_results.json
+          files: checkov_results.xml
 
