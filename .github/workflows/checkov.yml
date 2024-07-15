@@ -43,16 +43,11 @@ jobs:
       - name: Calculate Execution Time and Update JUnit XML
         if: always()
         run: |
-            csv_file="checkov_results.xml"
-
-            # Lesen der zweiten Zeile und Ersetzen von 'time="0.0"' durch 'time="${EXECUTION_TIME}''
-            second_line=$(sed -n 2p "$csv_file")
-            new_second_line=$(echo "$second_line" | sed "s/time=\"0.0\"/time=\"${EXECUTION_TIME}\"/")
-            # Ausgabe der neuen Zeile (optional)
-            echo "$new_second_line"
-            # Optional: Die neue Zeile wieder in die Datei schreiben
-            echo "$new_second_line" >> temp && mv temp "$csv_file"
-            #echo "$UPDATED_JUNIT_XML" > checkov_results.xml
+            END_TIME=$(date +%s%N) # Jetzt auch Mikrosekunden berücksichtigen
+            START_TIME=$(cat start_time.txt)
+            EXECUTION_TIME=$(( (END_TIME - START_TIME) / 1000000 )) # Konvertieren Sie in Millisekunden
+            sed -i "s/time=\"0.0\"/time=\"${EXECUTION_TIME}\"/" /pfad/zur/checkov_results.xml
+         
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
