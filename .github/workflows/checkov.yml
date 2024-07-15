@@ -1,19 +1,12 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main", "development" ]
   pull_request:
     branches: [ "main", "development" ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   checkov_scan_and_upload_results:
     runs-on: ubuntu-latest
@@ -24,7 +17,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x' # Passen Sie die Python-Version an Ihre Bedürfnisse an
+          python-version: '3.x'
 
       - name: Install dependencies
         run: |
@@ -33,13 +26,12 @@ jobs:
 
       - name: Run Checkov scan
         run: |
-          checkov --directory .
-
+          checkov --directory . --fail-on HIGH,CRITICAL
+          
       - name: Create and upload test results branch
         run: |
           import os
           from git import Repo
-
           pr_branch_name = os.getenv("GITHUB_HEAD_REF")
           test_results_branch_name = f"{pr_branch_name}_testresults"
           
@@ -47,8 +39,5 @@ jobs:
           repo.create_head(test_results_branch_name)
           repo.heads[test_results_branch_name].set_tracking_branch(repo.remotes.origin)
           repo.heads[test_results_branch_name].checkout()
-
-          # Hier können Sie weitere Aktionen hinzufügen, um die Testergebnisse in den Branch zu committen und zu pushen,
-          # z.B. die Ausgabe von Checkov in eine Datei speichern und diese Datei committen.
-
+          # Fügen Sie hier den Code hinzu, um die Testergebnisse in den Branch zu committen und zu pushen.
           print(f"Created branch '{test_results_branch_name}' based on PR branch '{pr_branch_name}'.")
