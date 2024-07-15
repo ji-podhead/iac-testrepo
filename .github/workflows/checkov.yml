@@ -38,13 +38,7 @@ jobs:
         run: |
           checkov --directory .  -o junitxml > checkov_results.xml
 
-      - name: Display Directory Contents and File Content
-        if: always()
-        run: |
-          echo "Listing directory contents:"
-          ls -la          
-          echo "Displaying content of a specific file:"
-          cat ./checkov_results.json
+
 
       - name: Calculate Execution Time and Update JUnit XML
         if: always()
@@ -68,3 +62,10 @@ jobs:
         if: always()
         with:
           files: checkov_results.xml
+      - name: Display Directory Contents and File Content
+        if: always()
+        run: |
+            echo "Listing directory contents:"
+            ls -la          
+            echo "Displaying"
+            cat ./checkov_results.xml
