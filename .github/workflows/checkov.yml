@@ -53,9 +53,9 @@ jobs:
 
             # Ersetzen Sie die Zeit im JUnit-XML-Dokument
             # Achten Sie darauf, dass der reguläre Ausdruck genau passt und die Zeit in Millisekunden konvertiert wird
-            UPDATED_JUNIT_XML=$(echo "$JUNIT_XML" | sed -E "s/(<testsuites[^>]*)(time=\"[0-9.]+\")/\1\2${EXECUTION_TIME}ms/")
-            UPDATED_JUNIT_XML=$(echo "$UPDATED_JUNIT_XML" | sed -E "s/(<testsuite[^>]*)(time=\"[0-9.]+\")/\1\2${EXECUTION_TIME}ms/")
-
+            #UPDATED_JUNIT_XML=$(echo "$JUNIT_XML" | sed -E "s/(<testsuites[^>]*)(time=\"[0-9.]+\")/\1\2${EXECUTION_TIME}ms/")
+            #UPDATED_JUNIT_XML=$(echo "$UPDATED_JUNIT_XML" | sed -E "s/(<testsuite[^>]*)(time=\"[0-9.]+\")/\1\2${EXECUTION_TIME}ms/")
+            UPDATED_JUNIT_XML=$(echo "$JUNIT_XML" | sed -E "s/time=\"([0-9.]+)\"ms/time=\"${EXECUTION_TIME}\"ms/g")
             # Schreiben Sie die aktualisierte JUnit-XML-Datei zurück
             echo "$UPDATED_JUNIT_XML" > checkov_results.xml
       - name: Publish Test Results
