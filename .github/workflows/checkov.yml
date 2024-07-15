@@ -19,12 +19,8 @@ jobs:
         
       - name: Get Start time
         id: starttime
-        if: always()
-        run: |
-            start=$(date +%s)
-            export TEMPORARY_END_TIME=$start
+        run: echo "::set-output name=start::$(date +%s)"
 
-      
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
@@ -51,9 +47,9 @@ jobs:
         if: always()
         run: |
             # Berechnen Sie die Laufzeit
-            EXECUTION_TIME=$(date +%s)-$TEMPORARY_END_TIME # Dies sollte durch die tatsächliche Berechnung ersetzt werden
-            echo "laufzeit ist"
-            echo $TEMPORARY_END_TIME
+            END_TIME=$(date +%s)
+            EXECUTION_TIME=$((END_TIME - ${ { steps.starttime.outputs.start } }))
+            echo "Laufzeit ist $EXECUTION_TIME Sekunden"
 
             # Lesen Sie die JUnit-XML-Datei
             JUNIT_XML=$(cat checkov_results.xml)
