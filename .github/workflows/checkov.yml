@@ -19,7 +19,10 @@ jobs:
         
       - name: Get Start time
         id: starttime
-        run: echo "::set-output name=start::$(date +%s)"
+        if: always()
+        run: |
+            start=$(date +%s)
+            echo "$start" > start_time.txt # Speichern Sie die Startzeit in einer Datei
 
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -48,7 +51,8 @@ jobs:
         run: |
             # Berechnen Sie die Laufzeit
             END_TIME=$(date +%s)
-            EXECUTION_TIME=$((END_TIME - ${ { steps.starttime.outputs.start } })) # Korrigierte Syntax            echo "Laufzeit ist $EXECUTION_TIME Sekunden"
+            EXECUTION_TIME=$((END_TIME - $(cat start_time.txt))) # Lesen Sie die Startzeit aus der Datei
+            echo "Laufzeit ist $EXECUTION_TIME Sekunden"
 
             # Lesen Sie die JUnit-XML-Datei
             JUNIT_XML=$(cat checkov_results.xml)
