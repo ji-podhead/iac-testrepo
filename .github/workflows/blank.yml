@@ -1,16 +1,13 @@
-# This is a basic workflow to help you get started with Actions
+name: Publish Test Results
 
-name: results
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "development" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "development" ]
+    branches:
+      - main
 
-  # All
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
@@ -22,27 +19,20 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x' # Stellen Sie sicher, dass Sie die richtige Python-Version verwenden
+        python-version: '3.x'
 
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest # Fügen Sie hier weitere Abhängigkeiten hinzu, falls erforderlich
+        pip install pytest
 
     - name: Run Tests
       run: |
-        pytest # Führen Sie Ihre Tests aus. Passen Sie diesen Befehl an Ihre Anforderungen an.
+        pytest
 
     - name: Publish Test Results
       id: publish_test_results
-      uses: EnricoMi/publish-unit-test-result-action/linux@v2
+      uses: actions/upload-artifact@v2
       with:
-        test-result-file: '**/test-results.xml' # Pfad zu Ihrer Testergebnisdatei
-        report-level: summary # Optional: Setzen Sie auf 'summary', 'detail', oder lassen Sie es leer für Standard
-        fail-if: true # Optional: Setzt den Exit-Code auf 1, wenn keine Testergebnisse gefunden werden
-
-    - name: Upload Coverage Report
-      if: ${{ failure() || always() }}
-      uses: codecov-action@v2
-      with:
-        file: ./coverage.xml # Pfad zu Ihrer Coverage-Datei
+        name: test-results
+        path: '**/test-results.xml'
