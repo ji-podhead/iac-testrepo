@@ -1,6 +1,7 @@
 # Pod-Shop
  ***App-Configuration***
 
+### CI-CD Pipeline
 ```mermaid
 graph TD;
     p1[pull Request and review]
@@ -15,6 +16,7 @@ graph TD;
   subgraph Jenkins
       c1[CodeQuality And Linting]
         t1[testing plans]
+	d1[Deployment]
     end
 end     
 
@@ -28,11 +30,13 @@ c1-->pub1
 pub1-->p1
 p1-->Development
 
-Main-->cronjob
+Main -->cronjob
 cronjob-->t1
 t1-->pub2
 pub2-->Main
-
+Development -."merge".->Main
+d1-->Proxmox
+Main-->d1
 ```
 
 
