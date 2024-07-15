@@ -28,17 +28,11 @@ jobs:
         run: |
           checkov --directory . 
           
-      - name: Create and upload test results branch  
-        if: always()
-        run: |
-          import os
-          from git import Repo
-          pr_branch_name = os.getenv("GITHUB_HEAD_REF")
-          test_results_branch_name = f"{pr_branch_name}_testresults"
-          
-          repo = Repo(os.getcwd())
-          repo.create_head(test_results_branch_name)
-          repo.heads[test_results_branch_name].set_tracking_branch(repo.remotes.origin)
-          repo.heads[test_results_branch_name].checkout()
-          # Fügen Sie hier den Code hinzu, um die Testergebnisse in den Branch zu committen und zu pushen.
-          print(f"Created branch '{test_results_branch_name}' based on PR branch '{pr_branch_name}'.")
+
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()    # run this step even if previous step failed
+        with:
+          name: JEST Tests            # Name of the check run which will be created
+          path: reports/jest-*.xml    # Path to test results
+          reporter: jest-junit        # Format of test results
