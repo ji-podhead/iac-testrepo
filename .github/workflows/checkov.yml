@@ -30,7 +30,7 @@ jobs:
       - name: Run Checkov scan
         run: |
           checkov --directory .  -o junitxml > checkov_results.xml
-          
+
       - name: Display Directory Contents and File Content
         if: always()
         run: |
@@ -40,6 +40,7 @@ jobs:
           cat ./checkov_results.json
 
       - name: Calculate Execution Time and Update JUnit XML
+        if: always()
         run: |
             # Berechnen Sie die Laufzeit
             EXECUTION_TIME=123 # Dies sollte durch die tatsächliche Berechnung ersetzt werden
