@@ -16,7 +16,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+<<<<<<< HEAD
       
+=======
+        
+      - name: Get Start time
+        id: starttime
+        if: always()
+        run: |
+            start=$(date +%s)
+            echo "$start" > start_time.txt # Speichern Sie die Startzeit in einer Datei
+
+>>>>>>> development
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
@@ -30,6 +41,7 @@ jobs:
       - name: Run Checkov scan
         run: |
           checkov --directory .  -o junitxml > checkov_results.xml
+<<<<<<< HEAD
       - name: Display Directory Contents and File Content
         if: always()
         run: |
@@ -38,9 +50,33 @@ jobs:
           echo "Displaying content of a specific file:"
           cat ./checkov_results.json
 
+=======
+
+
+
+      - name: Calculate Execution Time and Update JUnit XML
+        if: always()
+        run: |
+            END_TIME=$(date +%s%N) # Jetzt auch Mikrosekunden berücksichtigen
+            START_TIME=$(cat start_time.txt)
+            EXECUTION_TIME=$(( (END_TIME - START_TIME) / 1000000  )) # Konvertieren Sie in Millisekunden
+            sed -i "s/time=\"0.0\"/time=\"${EXECUTION_TIME}\"/" checkov_results.xml
+            sed -i "s/time=\"0\"/time=\"${EXECUTION_TIME}\"/" checkov_results.xml
+            echo "runtime is: " $EXECUTION_TIME
+>>>>>>> development
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
           files: checkov_results.xml
+<<<<<<< HEAD
 
+=======
+      - name: Display Directory Contents and File Content
+        if: always()
+        run: |
+            echo "Listing directory contents:"
+            ls -la          
+            echo "Displaying"
+            cat ./checkov_results.xml
+>>>>>>> development
