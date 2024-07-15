@@ -44,19 +44,20 @@ jobs:
         if: always()
         run: |
             # Berechnen Sie die Laufzeit
-            END_TIME=$(date +%s)
-            EXECUTION_TIME=$((END_TIME - $(cat start_time.txt))) # Lesen Sie die Startzeit aus der Datei
-            echo "Laufzeit ist $EXECUTION_TIME Sekunden"
+            END_TIME=$(date +%s%N) # Jetzt auch Mikrosekunden berücksichtigen
+            START_TIME=$(cat start_time.txt)
+            EXECUTION_TIME=$(( (END_TIME - START_TIME) / 1000000 )) # Konvertieren Sie in Millisekunden
 
+            # Lesen Sie die JUnit-XML-Datei
             JUNIT_XML=$(cat checkov_results.xml)
-      
+
             # Ersetzen Sie die Zeit im JUnit-XML-Dokument
-            UPDATED_JUNIT_XML=$(echo "$JUNIT_XML" | sed -E "s/(<testsuites[^>]*)(time=\"[0-9.]+\")/\1\2${EXECUTION_TIME}/")
-            UPDATED_JUNIT_XML=$(echo "$UPDATED_JUNIT_XML" | sed -E "s/(<testsuite[^>]*)(time=\"[0-9.]+\")/\1\2${EXECUTION_TIME}/")
-            
+            # Achten Sie darauf, dass der reguläre Ausdruck genau passt und die Zeit in Millisekunden konvertiert wird
+            UPDATED_JUNIT_XML=$(echo "$JUNIT_XML" | sed -E "s/(<testsuites[^>]*)(time=\"[0-9.]+\")/\1\2${EXECUTION_TIME}ms/")
+            UPDATED_JUNIT_XML=$(echo "$UPDATED_JUNIT_XML" | sed -E "s/(<testsuite[^>]*)(time=\"[0-9.]+\")/\1\2${EXECUTION_TIME}ms/")
+
             # Schreiben Sie die aktualisierte JUnit-XML-Datei zurück
             echo "$UPDATED_JUNIT_XML" > checkov_results.xml
-
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
