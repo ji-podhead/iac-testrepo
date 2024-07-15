@@ -46,7 +46,7 @@ jobs:
             END_TIME=$(date +%s%N) # Jetzt auch Mikrosekunden berücksichtigen
             START_TIME=$(cat start_time.txt)
             EXECUTION_TIME=$(( (END_TIME - START_TIME) / 1000000 )) # Konvertieren Sie in Millisekunden
-            sed -i "s/time=\"0.0\"/time=\"${EXECUTION_TIME}\"/" /pfad/zur/checkov_results.xml
+            sed -i "s/time=\"0.0\"/time=\"${EXECUTION_TIME}\"/" checkov_results.xml
          
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
