@@ -35,7 +35,7 @@ jobs:
 
     - name: Publish Test Results
       id: publish_test_results
-      uses: marketplacer/publish-test-results@v1
+      uses: EnricoMi/publish-unit-test-result-action/linux@v2
       with:
         test-result-file: '**/test-results.xml' # Pfad zu Ihrer Testergebnisdatei
         report-level: summary # Optional: Setzen Sie auf 'summary', 'detail', oder lassen Sie es leer für Standard
