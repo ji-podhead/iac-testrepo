@@ -1,6 +1,41 @@
 # Pod-Shop
  ***App-Configuration***
 
+```mermaid
+graph TD;
+    p1[pull Request and review]
+    pub1[publish test results]
+    pub2[publish test results]
+    cronjob
+
+    subgraph local_infra
+    Proxmox
+    Vault
+
+  subgraph Jenkins
+      c1[CodeQuality And Linting]
+        t1[testing plans]
+    end
+end     
+
+    subgraph GitHub 
+        Main 
+        Development 
+    end
+
+Development --> c1
+c1-->pub1
+pub1-->p1
+p1-->Development
+
+Main-->cronjob
+cronjob-->t1
+t1-->pub2
+pub2-->Main
+
+```
+
+
 ## 15.7.24
 
 at the moment i use vault for key/val secrets. the thing with secrets is that you cant read/get gh actions secrets and i need at least one secret to access vault, to read all the other secrets. 
@@ -23,5 +58,8 @@ no!<br>
 we deploy via tailscale, so we dont. this is kinda tricky, but as i mentioned before: 
 *I want to keep my project as flexible as possible*
 
+***Do I need jenkins?***
+im not really sure, but we can actually do our iac deployment without jenkins, but testing plans can profit from jenkins.
+- *it actually doesnt matter because you can migrate from jenkins to git.*
 
  ---
