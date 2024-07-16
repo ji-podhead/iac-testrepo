@@ -6,12 +6,13 @@ on:
   pull_request:
     branches: [ "main", "development" ]
   workflow_dispatch:
-#permissions:
-#  contents: read
-#  actions: read
-#  checks: write
-#  packages: write
-permissions: write-all
+permissions:
+  checks: write
+  pull-requests: write
+  packages: write # Fügt die Berechtigung zum Veröffentlichen von Paketen hinzu
+  contents: read # Fügt die Berechtigung zum Lesen von Commit-Daten hinzu
+
+#permissions: write-all
 jobs:
   checkov_scan_and_upload_results:
     runs-on: ubuntu-latest
