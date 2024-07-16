@@ -43,7 +43,6 @@ jobs:
       - name: Calculate Execution Time and Update JUnit XML
         if: always()
         run: |
-            RUN END_TIME=$(date +%s%N) 
             END_TIME=$(date +%s%N) 
             START_TIME=$(cat start_time.txt)
             EXECUTION_TIME=$((END_TIME - START_TIME)) # Convert to seconds
