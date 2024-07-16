@@ -43,12 +43,22 @@ jobs:
       - name: Calculate Execution Time and Update JUnit XML
         if: always()
         run: |
-            END_TIME=$(date +%s%N) 
-            START_TIME=$(cat start_time.txt)
-            EXECUTION_TIME=$((END_TIME - START_TIME)/1000000000) # Convert to seconds
-                        
+
+            # Setzen Sie END_TIME auf die aktuelle Zeit in Nanosekunden
+            END_TIME=$(date +%s%N)
+
+            # Lesen Sie START_TIME sicher ein und konvertieren Sie es in Millisekunden
+            read -r START_TIME < start_time.txt
+            START_TIME=$((START_TIME * 1000)) # Konvertiere in Millisekunden
+
+            # Berechne die Dauer in Sekunden
+            EXECUTION_TIME=$(( (END_TIME - START_TIME) / 1000000000 ))
+
+            # Aktualisiere die Zeit in checkov_results.xml
             sed -i "s/time=\"0.0\"/time=\"$EXECUTION_TIME\"/" checkov_results.xml
+
             echo "runtime is: " $EXECUTION_TIME
+
 
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
