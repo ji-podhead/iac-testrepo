@@ -50,7 +50,7 @@ jobs:
             echo "endtime is: " $END_TIME
             read -r START_TIME < start_time.txt
             START_TIMER=$((START_TIME)) # Konvertiere START_TIME in Millisekunden
-            EXECUTION_TIME=$(( (END_TIME - START_TIMER)  ))
+            EXECUTION_TIME=$(( (END_TIME - START_TIMER) /2 ))
             echo "runtime is: " $EXECUTION_TIME
             sed -i "s/time=\"0\"/time=\"$EXECUTION_TIME\"/" checkov_results.xml
 
