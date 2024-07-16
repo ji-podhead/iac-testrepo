@@ -1,3 +1,5 @@
+[![.github/workflows/blank.yml](https://github.com/ji-podhead/Pod-Shop-App-Configs/actions/workflows/blank.yml/badge.svg)](https://github.com/ji-podhead/Pod-Shop-App-Configs/actions/workflows/blank.yml)
+
 # Pod-Shop
  ***App-Configuration***
 
@@ -39,6 +41,8 @@ d1-->Proxmox
 Main-->d1
 ```
 
+## 16.7.
+created automatic iac checks, pull request rules for status check approve and test result publishing integration
 
 ## 15.7.24
 
