@@ -45,24 +45,13 @@ jobs:
         run: |
             start=$(date +%s)
             echo "starttime is" $start
-            echo "$start" > start_time.txt # Speichern Sie die Startzeit in einer Datei
-            # Setzen Sie END_TIME auf die aktuelle Zeit in Nanosekunden
-
-            # Fügen Sie hier eine Pause hinzu, um zu sehen, wie lange der Prozess dauert
-            sleep 2 # Pausiert die Ausführung für 5 Sekunden
+            
             END_TIME=$(date +%s)
-
             echo "endtime is: " $END_TIME
-
-            # Lesen Sie START_TIME sicher ein und konvertieren Sie es in Millisekunden
             read -r START_TIME < start_time.txt
             START_TIMER=$((START_TIME)) # Konvertiere START_TIME in Millisekunden
-
-            # Berechne die Dauer in Sekunden
             EXECUTION_TIME=$(( (END_TIME - START_TIMER)  ))
-
             echo "runtime is: " $EXECUTION_TIME
-        
             sed -i "s/time=\"0.0\"/time=\"$EXECUTION_TIME\"/" checkov_results.xml
 
       - name: Publish Test Results
