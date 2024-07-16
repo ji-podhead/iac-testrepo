@@ -7,7 +7,7 @@ on:
     branches: [ "main", "development" ]
   workflow_dispatch:
 permissions:
-  checks: read
+  checks: write
   pull-requests: write
   packages: write # Fügt die Berechtigung zum Veröffentlichen von Paketen hinzu
   contents: read # Fügt die Berechtigung zum Lesen von Commit-Daten hinzu
