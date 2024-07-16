@@ -41,6 +41,8 @@ d1-->Proxmox
 Main-->d1
 ```
 
+## 16.7.
+created automatic iac checks, pull request rules for status check approve and test result publishing integration
 
 ## 15.7.24
 
