@@ -10,6 +10,7 @@ permissions:
   contents: read
   actions: read
   checks: write
+  packages: write
 jobs:
   checkov_scan_and_upload_results:
     runs-on: ubuntu-latest
