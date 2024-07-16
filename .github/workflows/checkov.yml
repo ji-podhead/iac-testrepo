@@ -52,7 +52,7 @@ jobs:
             START_TIMER=$((START_TIME)) # Konvertiere START_TIME in Millisekunden
             EXECUTION_TIME=$(( (END_TIME - START_TIMER)  ))
             echo "runtime is: " $EXECUTION_TIME
-            sed -i "s/time=\"0.0\"/time=\"$EXECUTION_TIME\"/" checkov_results.xml
+            sed -i "s/time=\"0\"/time=\"$EXECUTION_TIME\"/" checkov_results.xml
 
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
