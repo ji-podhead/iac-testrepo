@@ -45,9 +45,10 @@ jobs:
         run: |
             END_TIME=$(date +%s%N) 
             START_TIME=$(cat start_time.txt)
-            EXECUTION_TIME=$((END_TIME - START_TIME / 1000000000)) # Konvertieren Sie in Sekunden
-            sed -i "s/time=\"0.0\"/time=\"10\"/" checkov_results.xml
-            sed -i "s/time=\"0\"/time=\"10\"/" checkov_results.xml
+            EXECUTION_TIME=$((END_TIME - START_TIME)) # Konvertieren Sie in Sekunden
+            EXECUTION_TIME=EXECUTION_TIME/1000000000
+            sed -i "s/time=\"0.0\"/time=\"0\"/" checkov_results.xml
+            sed -i "s/time=\"0\"/time=\"${EXECUTION_TIME}\"/" checkov_results.xml
             echo "runtime is: " $EXECUTION_TIME
 
       - name: Publish Test Results
