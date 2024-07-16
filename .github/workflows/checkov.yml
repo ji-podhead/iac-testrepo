@@ -46,8 +46,9 @@ jobs:
             END_TIME=$(date +%s%N) 
             START_TIME=$(cat start_time.txt)
             EXECUTION_TIME=$((END_TIME - START_TIME)) # Convert to seconds
+            echo "runtime is: " $EXECUTION_TIME
             EXECUTION_TIME=$(echo "$EXECUTION_TIME" | awk '{print $1/1000000000}')
-            sed -i "s/time=\"0\"/time=\"$EXECUTION_TIME\"/" checkov_results.xml
+            sed -i "s/time=\"0.0\"/time=\"$EXECUTION_TIME\"/" checkov_results.xml
             echo "runtime is: " $EXECUTION_TIME
 
       - name: Publish Test Results
