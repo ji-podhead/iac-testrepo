@@ -27,6 +27,7 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
       - name: ping 
         run: |
+          echo  $oauth-client-id
           RESPONSE=$(curl --write-out '%{http_code}' --silent --output /dev/null http://${{ secrets.tailscale_ip }}:${{ secrets.tailscale_port1 }})
           if [[ "$RESPONSE" == "200" ]]; then
             echo "HTTP Server is available."
