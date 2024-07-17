@@ -43,8 +43,8 @@ post {
  always {
             script {
                 // Hier können Sie Ihre Checks veröffentlichen
-               sh’echo "------ publish to git --------------"’
-                //publishChecks(name: 'test', title: 'Test Check', summary: 'Check durch Pipeline')
+               sh’echo "------ publish to git -----------ss---"’
+                publishChecks(name: 'test', title: 'Test Check', summary: 'Check durch Pipeline')
             }
         }
 
