@@ -1,5 +1,4 @@
 name: CI
-
 on:
   push:
     branches: [ "testjob" ]
@@ -26,9 +25,9 @@ jobs:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
-      - name: SSH into remote server
-        run: |
-          ssh ji@${{ secrets.TAILSCALE_IP}}
+      #- name: SSH into remote server
+      #  run: |
+      #    ssh <user>@${{ secrets.TAILSCALE_IP}}
       - name: ping 
         if: always()
         run: |
