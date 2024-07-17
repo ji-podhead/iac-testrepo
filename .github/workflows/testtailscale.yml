@@ -30,7 +30,7 @@ jobs:
       - name: ping 
         run: |
           echo  $oauth-client-id
-          RESPONSE=$(curl --write-out '%{http_code}' --silent --output /dev/null http://${{ secrets.tailscale_ip }}:${{ secrets.tailscale_port1 }})
+          RESPONSE=$(curl --write-out '%{http_code}' --silent --output /dev/null http://${{ secrets.TAILSCALE_IP }}:${{ secrets.TAILSCALE_SERVER_PORT_1 }})
           if [[ "$RESPONSE" == "200" ]]; then
             echo "HTTP Server is available."
           else
