@@ -3,12 +3,19 @@ name: Check HTTP Server Availability
 on:
   schedule:
     # Dieser Workflow wird täglich um 00:00 UTC ausgeführt
-    - cron: '* * * * *'
+    - cron: '5 * * * *'
 
 jobs:
   check-server:
     runs-on: ubuntu-latest
     steps:
+      - name: greetings
+        run: |
+                echo ".-------------------------------------."
+                echo "|       > running testjob <           |"
+                echo "*-------------------------------------*"
+                echo
+                echo "---------------------------------------"
       - name: Ping HTTP Server
         uses: tailscale/github-action@v2
         with:
