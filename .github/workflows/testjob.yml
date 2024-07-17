@@ -3,7 +3,7 @@ name: Check HTTP Server Availability
 on:
   schedule:
     # Dieser Workflow wird täglich um 00:00 UTC ausgeführt
-    - cron: '5 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   check-server:
