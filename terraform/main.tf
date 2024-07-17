@@ -1,4 +1,12 @@
 
+  terraform {
+    required_providers {
+        proxmox = {
+        source  = "telmate/proxmox"
+        version = "3.0.1-rc3"
+      }
+}
+}
   locals {
   // conf = data.external.config.result.login
     dir = "${path.module}"
@@ -8,8 +16,6 @@
   }
 
 
-  skip_child_token = true
-  
-}
+
  
 
