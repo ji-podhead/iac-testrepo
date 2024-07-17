@@ -19,6 +19,7 @@ jobs:
           echo "    °------------------------------------°   "
           echo
           echo "----------------------------------------------------"
+          echo  ${{ secrets.TS_OAUTH_CLIENT_ID }}
 
       - name: Setup Tailscale
         uses: tailscale/github-action@v2
