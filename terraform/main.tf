@@ -1,10 +1,4 @@
 
-  terraform {
-    required_providers {
-
-
-    }
-  }
   locals {
   // conf = data.external.config.result.login
     dir = "${path.module}"
