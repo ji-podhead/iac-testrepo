@@ -26,12 +26,12 @@ jobs:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
 
-      - name: Ping HTTP Server
-        run: |
-          RESPONSE=$(curl --write-out '%{http_code}' --silent --output /dev/null http://${{ secrets.tailscale_ip }}:${{ secrets.tailscale_port1 }})
-          if [[ "$RESPONSE" == "200" ]]; then
-            echo "HTTP Server is available."
-          else
-            echo "HTTP Server is unavailable. Response code: $RESPONSE"
-            exit 1
-          fi
+
+          run: |
+            RESPONSE=$(curl --write-out '%{http_code}' --silent --output /dev/null http://${{ secrets.tailscale_ip }}:${{ secrets.tailscale_port1 }})
+            if [[ "$RESPONSE" == "200" ]]; then
+              echo "HTTP Server is available."
+            else
+              echo "HTTP Server is unavailable. Response code: $RESPONSE"
+              exit 1
+            fi
