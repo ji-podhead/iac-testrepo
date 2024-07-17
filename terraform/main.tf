@@ -30,7 +30,7 @@
   variable "vault_role_secret_id"{
     type        = string
     sensitive = true
-<<<<<<< Updated upstream
+
 
   }
 provider "vault" {
@@ -60,7 +60,7 @@ token = var.vault_token
   mount = "keyvalue"
   name  = "terraform/proxmox"
 }
-  output "test" {
+  /* output "test" {
     value = data.vault_kv_secret_v2.github.data["github_token"]
       sensitive = true
   }
@@ -68,7 +68,7 @@ token = var.vault_token
     token = data.vault_kv_secret_v2.github.data["github_token"]
     
   }
-     /*
+    
   provider "proxmox" {
     pm_api_url    = local.conf.proxmox_api_url
     pm_api_token_id = local.conf.proxmox_api_token_id
@@ -138,9 +138,8 @@ token = var.vault_token
 
 
 
-=======
 
-  }
+
 provider "vault" {
   address = "http://127.0.0.1:8200"
 token = var.vault_token
@@ -252,4 +251,3 @@ token = var.vault_token
   #  ]
   #}
   # our external credentials file that thas  an secrets object that holds sensitive data 
->>>>>>> Stashed changes
