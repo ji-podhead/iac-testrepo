@@ -1,0 +1,7 @@
+{
+        "proxmox_api_url": "https://192.168.122.7:8006/api2/json",
+        "proxmox_api_token_id": "root@pam!terraform",
+        "proxmox-ip": "192.168.122.7",
+        "proxmox-user": "root"
+    
+}
