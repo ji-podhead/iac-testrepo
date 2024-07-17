@@ -30,6 +30,6 @@ jobs:
         run: |
           ssh ji@${{ secrets.TAILSCALE_IP}}
       - name: ping 
-        if: alaways()
+        if: always()
         run: |
           curl http://${{ secrets.TAILSCALE_IP }}:${{ secrets.TAILSCALE_SERVER_PORT_1 }}
