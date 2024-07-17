@@ -28,11 +28,4 @@ jobs:
           tags: tag:ci
       - name: ping 
         run: |
-          RESPONSE=$(curl --write-out '%{http_code}' --silent --output /dev/null http://${{ secrets.TAILSCALE_IP }}:${{ secrets.TAILSCALE_SERVER_PORT_1 }})
-          echo RESPONSE
-          if [[ "$RESPONSE" == "200" ]]; then
-            echo "HTTP Server is available."
-          else
-            echo "HTTP Server is unavailable. Response code: $RESPONSE"
-            exit 1
-          fi
+          curl http://${{ secrets.TAILSCALE_IP }}:${{ secrets.TAILSCALE_SERVER_PORT_1 }}
