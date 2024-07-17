@@ -13,13 +13,12 @@ jobs:
     steps:
       - name: greetings
         run: |
+          echo
           echo "----------------------------------------------------"
           echo "    .------------------------------------.  "
           echo "   |         > running testjob <          |  "
           echo "    °------------------------------------°   "
-          echo
           echo "----------------------------------------------------"
-          echo  ${{ secrets.TS_OAUTH_CLIENT_ID }}
 
       - name: Setup Tailscale
         uses: tailscale/github-action@v2
@@ -29,7 +28,6 @@ jobs:
           tags: tag:ci
       - name: ping 
         run: |
-          echo  $oauth-client-id
           RESPONSE=$(curl --write-out '%{http_code}' --silent --output /dev/null http://${{ secrets.TAILSCALE_IP }}:${{ secrets.TAILSCALE_SERVER_PORT_1 }})
           if [[ "$RESPONSE" == "200" ]]; then
             echo "HTTP Server is available."
