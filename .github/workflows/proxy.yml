@@ -35,7 +35,7 @@ jobs:
           title: "Temporary PR for redirection"
           body: "This PR is temporary and will be updated once tests pass in the private repo."
           branch: "$BRANCH_NAME"
-          base: "development"
+          base: "development2"
 
       - name: Wait for tests in private repo
         run: |
