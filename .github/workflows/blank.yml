@@ -8,6 +8,8 @@ on:
     - development
 jobs:
   redirect:
+
+    
     runs-on: ubuntu-latest
     steps:
     - name: Install GitHub CLI
@@ -18,12 +20,15 @@ jobs:
       
     - name: Get latest commit message from another private repo
       run: |
-        COMMIT_MESSAGE=$(gh api orgname/reponame/commits/main -q '.message')
+        COMMIT_MESSAGE=$(gh api ji-podhead/Pod-Shop-App-Configs-private/commits/main -q '.message')
         echo "Neueste Commit-Nachricht: $COMMIT_MESSAGE"
       env:
         ORGANIZATION: ji-podhead
         REPO_NAME: Pod-Shop-App-Configs-private
-    - name: Checkout repository
-      uses: actions/checkout@v2
+        run: |
+                git config user.name "GitHub Actions Bot"
+                git config user.email "<>"
+                - <make changes and commit >
+                - run: git push origin master
       
 
