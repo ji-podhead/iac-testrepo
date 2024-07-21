@@ -21,8 +21,8 @@ jobs:
         COMMIT_MESSAGE=$(gh api orgname/reponame/commits/main -q '.message')
         echo "Neueste Commit-Nachricht: $COMMIT_MESSAGE"
       env:
-        ORGANIZATION: orgname
-        REPO_NAME: reponame
+        ORGANIZATION: ji-podhead
+        REPO_NAME: Pod-Shop-App-Configs-private
     - name: Checkout repository
       uses: actions/checkout@v2
       
