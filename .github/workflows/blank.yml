@@ -1,7 +1,5 @@
 name: Redirect PR or Push to Private Repo
-
 on:
-
   pull_request:
     types: [opened, synchronize]
   push:
@@ -11,6 +9,17 @@ jobs:
   redirect:
     runs-on: ubuntu-latest
     steps:
+    - name: Install GitHub CLI
+      run: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+      shell: bash
+
+    - name: Get latest commit message from another private repo
+      run: |
+        COMMIT_MESSAGE=$(gh api orgname/reponame/commits/main -q '.message')
+        echo "Neueste Commit-Nachricht: $COMMIT_MESSAGE"
+      env:
+        ORGANIZATION: orgname
+        REPO_NAME: reponame
     - name: Checkout repository
       uses: actions/checkout@v2
       
