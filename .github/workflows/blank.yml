@@ -33,31 +33,3 @@ jobs:
           config.user.email "action@github.com"
           config.user.name "GitHub Action"
           
-    - name: Redirect PR or Push
-      run: |
-        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-          git remote remove origin
-          git remote add origin ${{ secrets.PRIVATE_REPO_URL }}
-          git branch -M master
-          git checkout -b ${{ github.head_ref }}
-          git push -u origin ${{ github.head_ref }}
-        elif [[ "${{ github.event_name }}" == "push" ]]; then
-          git remote remove origin
-          git remote add origin ${{ secrets.PRIVATE_REPO_URL }}
-          git branch -M master
-          git checkout -b ${{ github.ref }}
-          git push -u origin ${{ github.ref }}
-        else
-          echo "Unsupported event type"
-          exit 1
-        fi
-        
-    - name: Delete original PR or Reset local branch
-      if: github.event_name == 'pull_request'
-      uses: peter-evans/create-pull-request@v3
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: "Redirected PR/Push to private repo"
-        title: "Closed original PR/Push"
-        body: "This PR/Push has been redirected to the private repository."
-        labels: "closed"
