@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout öffentliches Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Git Config
         run: |
@@ -22,9 +22,22 @@ jobs:
       - name: Create temporary branch and PR
         run: |
           BRANCH_NAME="temp-pr-${{ github.run_id }}"
-
-          git push origin "$BRANCH_NAME"
-
+         # echo "Creating README.md..."
+         # test >> README2.md
+         # git checkout -b "$BRANCH_NAME"
+         # git add README2.md
+         # git commit -m "Add branch name of private repo"
+         # git push origin "$BRANCH_NAME"
+      - name: Deploy to external repository
+        uses: cpina/github-action-push-to-another-repository@main
+        with:
+          # GitHub Action output files
+          source-directory: public/
+          destination-github-username: ji-podhead
+          destination-repository-name: Pod-Shop-App-Configs-private 
+          user-email: bot@ji-podhead.de
+          # It defaults to `main`
+          target-branch: "test"
       - name: Create PR
         uses: peter-evans/create-pull-request@v3
         with:
