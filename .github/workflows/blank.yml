@@ -8,27 +8,19 @@ on:
     - development
 jobs:
   redirect:
-
-    
     runs-on: ubuntu-latest
     steps:
-    - name: Install GitHub CLI
-      run: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-      shell: bash
-    - name: Login to GitHub
-      run: gh auth login --with-token <<< "${{ secrets.PODSHOP_PRIVATE_PAT }}"
-      
-    - name: Get latest commit message from another private repo
-      run: |
-        COMMIT_MESSAGE=$(gh api ji-podhead/Pod-Shop-App-Configs-private/commits/main -q '.message')
-        echo "Neueste Commit-Nachricht: $COMMIT_MESSAGE"
-      env:
-        ORGANIZATION: ji-podhead
-        REPO_NAME: Pod-Shop-App-Configs-private
+      - uses: actions/checkout@v3
+        with:
+          repository: Pod-Shop-App-Configs-private
+          ref: 'test'
+          token:  ${{ secrets.PODSHOP_PRIVATE_PAT }}
+      - name: setup git config
         run: |
-                git config user.name "GitHub Actions Bot"
-                git config user.email "<>"
-                - <make changes and commit >
-                - run: git push origin master
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+      #- <make changes and commit >
+      #- run: git push origin master
       
-
+  
+  
