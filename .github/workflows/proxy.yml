@@ -8,7 +8,7 @@ on:
       - development
 
 jobs:
-  redirect:
+  redirect-PR:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout öffentliches Repository
