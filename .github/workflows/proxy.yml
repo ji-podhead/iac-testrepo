@@ -23,7 +23,7 @@ jobs:
         run: |
           BRANCH_NAME="temp-pr-${{ github.run_id }}"
           git checkout -b "$BRANCH_NAME"
-          git add README.md
+          git add README2.md
           git commit -m "Add branch name of private repo"
           git push origin "$BRANCH_NAME"
 
