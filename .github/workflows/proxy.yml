@@ -34,6 +34,7 @@ jobs:
           # GitHub Action output files
           token: ${{ secrets.PODSHOP_PRIVATE_PAT }}
           source-directory: public/
+          ssh-deploy-key: ${{ secrets.PODSHOP_PRIVATE_PAT }} # Stellen Sie sicher, dass dieser Secret korrekt gesetzt ist
           destination-github-username: ji-podhead
           destination-repository-name: Pod-Shop-App-Configs-private 
           user-email: bot@ji-podhead.de
