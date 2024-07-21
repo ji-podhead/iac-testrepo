@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: Pod-Shop-App-Configs-private
+          repository: ji-podhead/Pod-Shop-App-Configs-private
           ref: 'test'
           token:  ${{ secrets.PODSHOP_PRIVATE_PAT }}
       - name: setup git config
