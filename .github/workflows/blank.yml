@@ -1,11 +1,12 @@
 name: Redirect PR or Push to Private Repo
 
 on:
+
   pull_request:
     types: [opened, synchronize]
   push:
-    branches-ignore: [main] # Ignoriert Pushes auf den main Branch, falls gewünscht
-
+    branches:
+    - main
 jobs:
   redirect:
     runs-on: ubuntu-latest
