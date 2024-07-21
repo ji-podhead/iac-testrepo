@@ -1,0 +1,49 @@
+name: Automatische Weiterleitung von PRs an eine private Repo
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  push:
+    branches:
+      - development
+
+jobs:
+  redirect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout öffentliches Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Git Config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "bot@example.com"
+
+      - name: Create temporary branch and PR
+        run: |
+          BRANCH_NAME="temp-pr-${{ github.run_id }}"
+          git checkout -b "$BRANCH_NAME"
+          git add README.md
+          git commit -m "Add branch name of private repo"
+          git push origin "$BRANCH_NAME"
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.PODSHOP_PRIVATE_PAT }}
+          commit-message: "Initial commit"
+          title: "Temporary PR for redirection"
+          body: "This PR is temporary and will be updated once tests pass in the private repo."
+          branch: "$BRANCH_NAME"
+          base: "development"
+
+      - name: Wait for tests in private repo
+        run: |
+          # Implement waiting logic here, possibly using a script that checks the status of the tests in the private repo
+          # This could involve polling the CI status of the private repo until it shows success
+
+      - name: Merge PR and update with actual changes
+        run: |
+          # After tests pass, merge the temporary PR and update it with the actual changes from the private repo
+          # This might involve checking out the private repo, making the necessary changes, committing them, and pushing them to the original branch
+          # Then, create a new PR with these changes and close the temporary one
