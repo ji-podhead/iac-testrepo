@@ -26,10 +26,4 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       
-    - name: Set up Git
-      uses: actions/setup-git@v2
-      with:
-        git-config: |
-          config.user.email "action@github.com"
-          config.user.name "GitHub Action"
-          
+
