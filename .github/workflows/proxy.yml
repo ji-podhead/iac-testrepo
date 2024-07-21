@@ -32,9 +32,8 @@ jobs:
         uses: cpina/github-action-push-to-another-repository@main
         with:
           # GitHub Action output files
-          token: ${{ secrets.PODSHOP_PRIVATE_PAT }}
           source-directory: public/
-          ssh-deploy-key: ${{ secrets.PODSHOP_PRIVATE_PAT }} # Stellen Sie sicher, dass dieser Secret korrekt gesetzt ist
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }} # Stellen Sie sicher, dass dieser Secret korrekt gesetzt ist
           destination-github-username: ji-podhead
           destination-repository-name: Pod-Shop-App-Configs-private 
           user-email: bot@ji-podhead.de
