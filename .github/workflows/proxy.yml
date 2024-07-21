@@ -30,6 +30,8 @@ jobs:
          # git push origin "$BRANCH_NAME"
       - name: Deploy to external repository
         uses: cpina/github-action-push-to-another-repository@main
+        env:
+              API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           # GitHub Action output files
           source-directory: public/
@@ -39,6 +41,7 @@ jobs:
           user-email: bot@ji-podhead.de
           # It defaults to `main`
           target-branch: "test"
+          
       - name: Create PR
         uses: peter-evans/create-pull-request@v3
         with:
