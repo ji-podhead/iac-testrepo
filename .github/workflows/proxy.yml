@@ -22,11 +22,7 @@ jobs:
       - name: Create temporary branch and PR
         run: |
           BRANCH_NAME="temp-pr-${{ github.run_id }}"
-          echo "Creating README.md..."
-          test >> README2.md
-          git checkout -b "$BRANCH_NAME"
-          git add README2.md
-          git commit -m "Add branch name of private repo"
+
           git push origin "$BRANCH_NAME"
 
       - name: Create PR
@@ -37,7 +33,7 @@ jobs:
           title: "Temporary PR for redirection"
           body: "This PR is temporary and will be updated once tests pass in the private repo."
           branch: "$BRANCH_NAME"
-          base: "development2"
+          base: "development"
 
       - name: Wait for tests in private repo
         run: |
