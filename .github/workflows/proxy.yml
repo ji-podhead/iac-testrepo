@@ -13,7 +13,9 @@ jobs:
     steps:
       - name: Checkout öffentliches Repository
         uses: actions/checkout@v4
-
+      - name: Setup Git Configg
+        run: |
+          echo $GITHUB_WORKSPACE
       - name: Setup Git Config
         run: |
           echo $GITHUB_WORKSPACE
