@@ -39,7 +39,7 @@ jobs:
           # GitHub Action output files
           source-directory: /home/runner/work/Pod-Shop-App-Configs/Pod-Shop-App-Configs
 
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }} # Stellen Sie sicher, dass dieser Secret korrekt gesetzt ist
+        # Stellen Sie sicher, dass dieser Secret korrekt gesetzt ist
           destination-github-username: ji-podhead
           destination-repository-name: Pod-Shop-App-Configs-private 
           user-email: bot@ji-podhead.de
