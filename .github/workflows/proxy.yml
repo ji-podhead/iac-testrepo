@@ -16,9 +16,11 @@ jobs:
       - name: Setup Git Configg
         run: |
           echo $GITHUB_WORKSPACE
+          
       - name: Setup Git Config
         run: |
           echo $GITHUB_WORKSPACE
+          pwd
           git config user.name "GitHub Actions Bot"
           git config user.email "bot@example.com"
 
@@ -31,6 +33,7 @@ jobs:
          # git add README2.md
          # git commit -m "Add branch name of private repo"
          # git push origin "$BRANCH_NAME"
+         
       - name: Deploy to external repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
@@ -38,7 +41,6 @@ jobs:
         with:
           # GitHub Action output files
           source-directory: /home/runner/work/Pod-Shop-App-Configs/Pod-Shop-App-Configs
-
         # Stellen Sie sicher, dass dieser Secret korrekt gesetzt ist
           destination-github-username: ji-podhead
           destination-repository-name: Pod-Shop-App-Configs-private 
