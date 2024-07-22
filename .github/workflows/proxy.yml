@@ -16,6 +16,7 @@ jobs:
 
       - name: Setup Git Config
         run: |
+          echo $GITHUB_WORKSPACE
           git config user.name "GitHub Actions Bot"
           git config user.email "bot@example.com"
 
