@@ -34,7 +34,7 @@ jobs:
               API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           # GitHub Action output files
-          source-directory: public/
+          source-directory: /
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }} # Stellen Sie sicher, dass dieser Secret korrekt gesetzt ist
           destination-github-username: ji-podhead
           destination-repository-name: Pod-Shop-App-Configs-private 
