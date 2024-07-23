@@ -54,7 +54,8 @@ jobs:
           echo "Your push was turned into a PR and pushed to a private repo for testing. Your code is currently sealed and will be released for review here, once all tests passed." > README.md
           git add README.md
           git commit -m "Add README for review instructions"
-          git push
+          git push --set-upstream origin "$NEW_BRANCH_NAME"
+          #git push
       - name: Wait for tests in private repo
         run: |
           # Implement waiting logic here, possibly using a script that checks the status of the tests in the private repo
