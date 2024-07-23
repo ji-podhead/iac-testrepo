@@ -1,0 +1,75 @@
+name: Automatische Weiterleitung von PRs an eine private Repo
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  push:
+    branches:
+      - development
+
+jobs:
+  redirect-PR:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    
+    steps:
+      - name: Checkout öffentliches Repository
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: infos
+        run: |
+          echo "
+           branch: ${{ github.run_id }}
+           workspace: $GITHUB_WORKSPACE"
+          
+          
+      - name: git config
+        run: |
+          BRANCH_NAME="temp-pr-${{ github.run_id }}"
+          git config --global user.email "bot@ji-podhead.com"
+          git config --global user.name "pod shop bot"
+                
+      - name: Push to target repo
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.API_TOKEN_GITHUB }}
+          repository: ji-podhead/iac-testrepo 
+          branch: test
+          directory: ./
+    
+      - name: Remove files from commit after testing
+        run: |
+
+          
+      - name: Create new branch with README
+        run: |
+          git config --global user.email "bot@ji-podhead.com"
+          git config --global user.name "ji-podhead"
+          git config --global url.https://${{ secrets.API_TOKEN_GITHUB }}@github.com/.insteadOf https://github.com/
+          # --- checking out to new branch ---
+          NEW_BRANCH_NAME=${{ github.run_id }}
+          git checkout -b "$NEW_BRANCH_NAME"
+          # --- removing files ---
+          git reset --hard HEAD~1
+          git commit --allow-empty -m "Removed files after testing"
+          # --- create readme ---
+          echo "Your push was turned into a PR and pushed to a private repo for testing. Your code is currently sealed and will be released for review here, once all tests passed." > README.md
+          git add README.md
+          git commit -m "Add README for review instructions"
+          # --- push to new branch ---
+          git push --set-upstream origin "$NEW_BRANCH_NAME"
+          #git push
+          
+      - name: Wait for tests in private repo
+        run: |
+          # Implement waiting logic here, possibly using a script that checks the status of the tests in the private repo
+          # This could involve polling the CI status of the private repo until it shows success
+
+      - name: Merge PR and update with actual changes
+        run: |
+          # After tests pass, merge the temporary PR and update it with the actual changes from the private repo
+          # This might involve checking out the private repo, making the necessary changes, committing them, and pushing them to the original branch
+          # Then, create a new PR with these changes and close the temporary one
