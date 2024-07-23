@@ -22,12 +22,6 @@ jobs:
       - name: Setup Git Configg
         run: |
           echo $GITHUB_WORKSPACE
-         
-
-
-      - name: Create temporary branch and PR
-        run: |
-          BRANCH_NAME="temp-pr-${{ github.run_id }}"
 
       - name: Create temporary branch and PR
         run: |
@@ -68,10 +62,11 @@ jobs:
           body: "This PR is created from the review branch for further review."
           branch: ${{NEW_BRANCH_NAME}}
           base: main # Adjust this to the original branch that triggered the workflow
-        - name: Wait for tests in private repo
-          run: |
-            # Implement waiting logic here, possibly using a script that checks the status of the tests in the private repo
-            # This could involve polling the CI status of the private repo until it shows success
+      
+      - name: Wait for tests in private repo
+        run: |
+          # Implement waiting logic here, possibly using a script that checks the status of the tests in the private repo
+          # This could involve polling the CI status of the private repo until it shows success
 
       - name: Merge PR and update with actual changes
         run: |
