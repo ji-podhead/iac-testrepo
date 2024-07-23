@@ -26,7 +26,7 @@ jobs:
            workspace: $GITHUB_WORKSPACE"
           
       - name: Set up Git
-        uses: actions/setup-git@v2
+        uses: actions/setup-git@v4
         with:
           git-config: |
             config.user.email "action@github.com"
