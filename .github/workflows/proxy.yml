@@ -46,7 +46,7 @@ jobs:
           github_token: ${{ secrets.API_TOKEN_GITHUB  }}
           repository: ji-podhead/Pod-Shop-App-Configs-private 
           branch: test
-          folder: ./readme.md 
+          directory: ./readme.md 
 
           
       - name: Create PR
