@@ -16,8 +16,8 @@ jobs:
       - name: Checkout öffentliches Repository
         uses: actions/checkout@v4
         with:
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
-          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+          persist-credentials: false
+          fetch-depth: 0
 
       - name: Setup Git Configg
         run: |
@@ -34,10 +34,10 @@ jobs:
       - name: Push to target repo
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{secrets.API_TOKEN_GITHUB}}
+          github_token: ${{ secrets.API_TOKEN_GITHUB }}
           repository: ji-podhead/iac-testrepo 
           branch: test
-          directory: ./ 
+          directory: ./
     
       - name: Remove files from commit after testing
         run: |
@@ -56,11 +56,11 @@ jobs:
       - name: Create PR from new branch
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{secrets.GITHUB_TOKEN}}
+          token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Create PR from review branch"
           title: "Review PR from Testing"
           body: "This PR is created from the review branch for further review."
-          branch: ${{NEW_BRANCH_NAME}}
+          branch: "${{ env.NEW_BRANCH_NAME }}" # Correctly reference the environment variable
           base: main # Adjust this to the original branch that triggered the workflow
       
       - name: Wait for tests in private repo
