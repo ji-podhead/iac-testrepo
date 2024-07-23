@@ -57,7 +57,7 @@ jobs:
           commit-message: "Initial commit"
           title: "Temporary PR for redirection"
           body: "This PR is temporary and will be updated once tests pass in the private repo."
-          branch: "$BRANCH_NAME"
+          branch: "BRANCH_NAME"
           base: "development"
 
       - name: Wait for tests in private repo
