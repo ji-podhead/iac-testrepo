@@ -42,21 +42,27 @@ jobs:
     
       - name: Remove files from commit after testing
         run: |
-          git reset --hard HEAD~1
-          git commit --allow-empty -m "Removed files after testing"
+
           
       - name: Create new branch with README
         run: |
           git config --global user.email "bot@ji-podhead.com"
           git config --global user.name "ji-podhead"
           git config --global url.https://${{ secrets.API_TOKEN_GITHUB }}@github.com/.insteadOf https://github.com/
-          NEW_BRANCH_NAME="review-$BRANCH_NAME"
+          # --- checking out to new branch ---
+          NEW_BRANCH_NAME="$BRANCH_NAME"
           git checkout -b "$NEW_BRANCH_NAME"
+          # --- removing files ---
+          git reset --hard HEAD~1
+          git commit --allow-empty -m "Removed files after testing"
+          # --- create readme ---
           echo "Your push was turned into a PR and pushed to a private repo for testing. Your code is currently sealed and will be released for review here, once all tests passed." > README.md
           git add README.md
           git commit -m "Add README for review instructions"
+          # --- push to new branch ---
           git push --set-upstream origin "$NEW_BRANCH_NAME"
           #git push
+          
       - name: Wait for tests in private repo
         run: |
           # Implement waiting logic here, possibly using a script that checks the status of the tests in the private repo
