@@ -27,7 +27,7 @@ jobs:
       - name: Create temporary branch and PR
         run: |
           BRANCH_NAME="temp-pr-${{ github.run_id }}"
-          source-directory="/home/runner/work/Pod-Shop-App-Configs/Pod-Shop-App-Configs"
+      #    source-directory="/home/runner/work/Pod-Shop-App-Configs/Pod-Shop-App-Configs"
          # echo "Creating README.md..."
          # test >> README2.md
          # git checkout -b "$BRANCH_NAME"
