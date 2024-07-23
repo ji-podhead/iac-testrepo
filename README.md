@@ -1,45 +1,9 @@
 [![.github/workflows/blank.yml](https://github.com/ji-podhead/Pod-Shop-App-Configs/actions/workflows/blank.yml/badge.svg)](https://github.com/ji-podhead/Pod-Shop-App-Configs/actions/workflows/blank.yml)
 
-# Pod-Shopa
+# Pod-Shop
  ***App-Configuration***
 
-### CI-CD Pipeline
-```mermaid
-graph TD;
-    p1[pull Request and review]aa
-    pub1[publish test results]
-    pub2[publish test results]
-    cronjob
 
-    subgraph local_infra
-    Proxmox
-    Vault
-
-  subgraph Jenkins
-      c1[CodeQuality And Linting]
-        t1[testing plans]
-	d1[Deployment]
-    end
-end     aa
-a
-    subgraph GitHub 
-        Main 
-        Development 
-    end
-
-Development --> c1
-c1-->pub1
-pub1-->p1
-p1-->Development
-
-Main -->cronjob
-cronjob-->t1
-t1-->pub2
-pub2-->Main
-Development -."merge".->Main
-d1-->Proxmox
-Main-->d1
-```
 
 ## 16.7.
 created automatic iac checks, pull request rules for status check approve and test result publishing integration
