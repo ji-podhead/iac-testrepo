@@ -26,16 +26,12 @@ jobs:
            workspace: $GITHUB_WORKSPACE"
           
           
-      - name: Create temporary branch and PR
+      - name: git config
         run: |
           BRANCH_NAME="temp-pr-${{ github.run_id }}"
           git config --global user.email "bot@ji-podhead.com"
           git config --global user.name "pod shop bot"
-          git checkout -b "$BRANCH_NAME"
-          git add .
-          git commit -m "Initial commit for testing"
-          git push origin "$BRANCH_NAME"
-      
+                
       - name: Push to target repo
         uses: ad-m/github-push-action@master
         with:
