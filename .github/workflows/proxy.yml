@@ -25,16 +25,12 @@ jobs:
            branch: temp-pr-${{ github.run_id }} \n
            workspace: $GITHUB_WORKSPACE"
           
-      - name: Set up Git
-        uses: actions/setup-git@v4
-        with:
-          git-config: |
-            config.user.email "action@github.com"
-            config.user.name "GitHub Action"
           
       - name: Create temporary branch and PR
         run: |
           BRANCH_NAME="temp-pr-${{ github.run_id }}"
+          git config --global user.email "bot@ji-podhead.com"
+          git config --global user.name "pod shop bot"
           git checkout -b "$BRANCH_NAME"
           git add .
           git commit -m "Initial commit for testing"
