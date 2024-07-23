@@ -22,7 +22,7 @@ jobs:
       - name: infos
         run: |
           echo "
-           branch: temp-pr-${{ github.run_id }} \n
+           branch: temp-pr-${{ github.run_id }}
            workspace: $GITHUB_WORKSPACE"
           
           
