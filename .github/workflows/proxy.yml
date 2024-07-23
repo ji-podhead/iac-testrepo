@@ -53,7 +53,7 @@ jobs:
       - name: Create PR
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.PODSHOP_PRIVATE_PAT }}
+          token: ${{ secrets.API_TOKEN_GITHUB }}
           commit-message: "Initial commit"
           title: "Temporary PR for redirection"
           body: "This PR is temporary and will be updated once tests pass in the private repo."
