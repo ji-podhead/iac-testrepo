@@ -46,7 +46,8 @@ jobs:
           git commit --allow-empty -m "Removed files after testing"
           
       - name: Create new branch with README
-        run: |
+      - uses: actions/checkout@v4
+      - run: |
           git config --global user.email "bot@ji-podhead.com"
           git config --global user.name "ji-podhead"
           NEW_BRANCH_NAME="review-$BRANCH_NAME"
@@ -54,7 +55,7 @@ jobs:
           echo "Your push was turned into a PR and pushed to a private repo for testing. Your code is currently sealed and will be released for review here, once all tests passed." > README.md
           git add README.md
           git commit -m "Add README for review instructions"
-
+          git push
       - name: Wait for tests in private repo
         run: |
           # Implement waiting logic here, possibly using a script that checks the status of the tests in the private repo
