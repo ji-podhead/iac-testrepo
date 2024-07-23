@@ -47,6 +47,8 @@ jobs:
           
       - name: Create new branch with README
         run: |
+          git config --global user.email "bot@ji-podhead.com"
+          git config --global user.name "pod shop bot"
           NEW_BRANCH_NAME="review-$BRANCH_NAME"
           git checkout -b "$NEW_BRANCH_NAME"
           echo "Your push was turned into a PR and pushed to a private repo for testing. Your code is currently sealed and will be released for review here, once all tests passed." > README.md
