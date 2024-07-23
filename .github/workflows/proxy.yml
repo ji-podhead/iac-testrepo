@@ -37,7 +37,7 @@ jobs:
         with:
           github_token: ${{ secrets.API_TOKEN_GITHUB }}
           repository: ji-podhead/iac-testrepo 
-          branch: test
+          branch: ${{ github.run_id }}
           directory: ./
     
       - name: Remove files from commit after testing
