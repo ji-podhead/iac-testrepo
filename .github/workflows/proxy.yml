@@ -1,4 +1,4 @@
-name: Automatische Weiterleitung von PRs an eine private Repo
+name: pr bot
 
 on:
   pull_request:
