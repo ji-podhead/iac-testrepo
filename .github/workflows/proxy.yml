@@ -11,8 +11,9 @@ jobs:
   redirect-PR:
     runs-on: ubuntu-latest
     permissions:             
-        contents: write           # 'write' access to repository contents
-        pull-requests: write  
+      pull-requests: write
+      issues: write
+      repository-projects: write
     steps:
       - name: Checkout öffentliches Repository
         uses: actions/checkout@v2
