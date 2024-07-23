@@ -65,7 +65,7 @@ jobs:
           git push --set-upstream origin "$NEW_BRANCH_NAME"
           #git push
 
-      - name: Create new branch with README
+      - name: finish
         run: |   
                # # Überprüfen Sie, ob bestimmte Dateien geändert wurden
                # if [ "$(git diff --name-only HEAD^ HEAD | grep 'datei_zu_überprüfen.txt')" ]; then
