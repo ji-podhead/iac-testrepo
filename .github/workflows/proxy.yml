@@ -27,26 +27,27 @@ jobs:
       - name: Create temporary branch and PR
         run: |
           BRANCH_NAME="temp-pr-${{ github.run_id }}"
+          source-directory="/home/runner/work/Pod-Shop-App-Configs/Pod-Shop-App-Configs"
          # echo "Creating README.md..."
          # test >> README2.md
          # git checkout -b "$BRANCH_NAME"
          # git add README2.md
          # git commit -m "Add branch name of private repo"
-         # git push origin "$BRANCH_NAME"
-         
-      - name: Deploy to external repository
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-              API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+         # git push origin "$BRANCH_NAME"    
+     # - name: Commit changes
+    #    run: |
+    #      git config user.name "GitHub Action"
+    #    git config user.email "action@github.com"
+     #     git commit -am "Commit message"
+      
+      - name: Push to target repo
+        uses: ad-m/github-push-action@master
         with:
-          # GitHub Action output files
-          #source-directory: /home/runner/work/Pod-Shop-App-Configs/Pod-Shop-App-Configs
-        # Stellen Sie sicher, dass dieser Secret korrekt gesetzt ist
-          destination-github-username: ji-podhead
-          destination-repository-name: Pod-Shop-App-Configs-private 
-          user-email: bot@ji-podhead.de
-          # It defaults to `main`
-          target-branch: "test"
+          github_token: ${{ secrets.API_TOKEN_GITHUB  }}
+          repository: ji-podhead/Pod-Shop-App-Configs-private 
+          branch: test
+          folder: ./readme.md 
+
           
       - name: Create PR
         uses: peter-evans/create-pull-request@v3
