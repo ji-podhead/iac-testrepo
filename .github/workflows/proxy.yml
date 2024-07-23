@@ -53,7 +53,8 @@ jobs:
           NEW_BRANCH_NAME=${{ github.run_id }}
           git checkout -b "$NEW_BRANCH_NAME"
           # --- removing files ---
-          rm -R "$GITHUB_WORKSPACE/"
+          ls $GITHUB_WORKSPACE/
+          #rm -R "$GITHUB_WORKSPACE/"
 
           # --- create readme ---
           echo "Your push was turned into a PR and pushed to a private repo for testing. Your code is currently sealed and will be released for review here, once all tests passed." > README.md
