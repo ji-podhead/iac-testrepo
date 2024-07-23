@@ -43,6 +43,8 @@ jobs:
       - name: Remove files from commit after testing
         run: |
              ls $GITHUB_WORKSPACE/
+             git reset --hard HEAD~1
+             ls $GITHUB_WORKSPACE/
 
           
       - name: Create new branch with README
