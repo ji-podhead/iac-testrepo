@@ -14,7 +14,7 @@ jobs:
     
     steps:
       - name: Checkout öffentliches Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -46,8 +46,7 @@ jobs:
           git commit --allow-empty -m "Removed files after testing"
           
       - name: Create new branch with README
-      - uses: actions/checkout@v4
-      - run: |
+        run: |
           git config --global user.email "bot@ji-podhead.com"
           git config --global user.name "ji-podhead"
           NEW_BRANCH_NAME="review-$BRANCH_NAME"
