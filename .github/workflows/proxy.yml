@@ -48,7 +48,7 @@ jobs:
         with:
           github_token: ${{ secrets.API_TOKEN_GITHUB  }}
           repository: ji-podhead/iac-testrepo 
-          branch: main
+          branch: test
           directory: ./ 
 
           
