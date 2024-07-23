@@ -64,7 +64,17 @@ jobs:
           # --- push to new branch ---
           git push --set-upstream origin "$NEW_BRANCH_NAME"
           #git push
-          
+
+      - name: Create new branch with README
+        run: |   
+               # # Überprüfen Sie, ob bestimmte Dateien geändert wurden
+               # if [ "$(git diff --name-only HEAD^ HEAD | grep 'datei_zu_überprüfen.txt')" ]; then
+               #     echo "Änderung an 'datei_zu_überprüfen.txt' gefunden. Bitte überprüfen Sie die Änderungen."
+               #     exit 1
+               # fi
+               # # Führen Sie weitere Überprüfungen durch oder lassen Sie den Commit zu
+               echo "please see your related branch and pr that was automatically created: ${{ github.run_id }}"   
+               exit 0
       - name: Wait for tests in private repo
         run: |
           # Implement waiting logic here, possibly using a script that checks the status of the tests in the private repo
